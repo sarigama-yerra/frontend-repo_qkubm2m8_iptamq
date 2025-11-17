@@ -1,26 +1,28 @@
 import { useState } from 'react'
+import Header from './components/Header'
+import ClubManager from './components/ClubManager'
+import Schedule from './components/Schedule'
+import Finance from './components/Finance'
+import Announcements from './components/Announcements'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tab, setTab] = useState('club')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100">
+      <Header current={tab} onChange={setTab} />
+
+      <main className="max-w-6xl mx-auto p-4 space-y-6">
+        <section className="bg-blue-600 text-white rounded-xl p-6 shadow">
+          <h1 className="text-2xl font-bold">Run your whole club from one app</h1>
+          <p className="text-blue-50 mt-1">Members, teams, payments, and communication — all connected and automated.</p>
+        </section>
+
+        {tab === 'club' && <ClubManager />}
+        {tab === 'schedule' && <Schedule />}
+        {tab === 'finance' && <Finance />}
+        {tab === 'announcements' && <Announcements />}
+      </main>
     </div>
   )
 }
